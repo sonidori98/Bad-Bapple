@@ -229,6 +229,7 @@ ensure_frames() {
 main(argc, argv) {
     extrn path, dims;
     auto fd, frame, pid, n, ln_argv[5];
+    auto start, target;
 
     if (argc < 2) {
         printf("usage: badapple <video>*n");
@@ -261,15 +262,18 @@ main(argc, argv) {
         exit();
     }
 
+    start = time_ms();
     frame = 1;
     while (1) {
+        target = start + frame * 33;
         build_path(frame);
         fd = open(path, 0);
         if (fd < 0) goto done;
         n = convert_frame(fd);
         close(fd);
         flush(n);
-        sleep_ms(33);
+        n = time_ms();
+        if (target > n) sleep_ms(target - n);
         frame =+ 1;
     }
 

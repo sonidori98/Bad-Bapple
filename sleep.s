@@ -1,5 +1,6 @@
 .intel_syntax noprefix
 .global sleep_ms
+.global time_ms
 .text
 
 sleep_ms:
@@ -28,4 +29,25 @@ sleep_ms:
     add rsp, 16
 
 .done:
+    ret
+
+time_ms:
+    sub rsp, 16
+    mov rdi, 1
+    mov rsi, rsp
+    mov rax, 228
+    syscall
+
+    mov rax, [rsp]
+    mov rdi, 1000
+    mul rdi
+    mov rcx, rax
+
+    mov rax, [rsp + 8]
+    mov rdi, 1000000
+    xor rdx, rdx
+    div rdi
+
+    add rax, rcx
+    add rsp, 16
     ret
