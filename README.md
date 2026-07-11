@@ -5,7 +5,8 @@
 ## Requirements
 
 - A B compiler
-- FFmpeg (`ffmpeg` and `ffplay`)
+- FFmpeg (`ffmpeg`)
+- ALSA (`aplay`, provided by `alsa-utils`)
 - A **Bad Apple!!** video file
 
 ## Build

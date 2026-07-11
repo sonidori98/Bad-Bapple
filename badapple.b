@@ -258,7 +258,7 @@ main(argc, argv) {
     pid = fork();
     if (pid == 0) {
         execl("/bin/sh", "sh", "-c",
-        "ffplay -nodisp -autoexit -volume 20 movie.mp4", 0);
+        "ffmpeg -i movie.mp4 -vn -af 'volume=0.2' -f s16le -ar 44100 -ac 2 - | aplay -r 44100 -c 2 -f S16_LE", 0);
         exit();
     }
 
