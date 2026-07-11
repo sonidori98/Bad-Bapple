@@ -265,7 +265,7 @@ main(argc, argv) {
     start = time_ms();
     frame = 1;
     while (1) {
-        target = start + frame * 33;
+        target = start + (frame * 1000) / 30;
         build_path(frame);
         fd = open(path, 0);
         if (fd < 0) goto done;
